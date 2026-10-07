@@ -391,13 +391,29 @@
     }
   }
 
+  .upstream-groups {
+    margin-bottom: 1.5rem;
+  }
+
+  .upstream-group + .upstream-group {
+    margin-top: 2.5rem;
+  }
+
+  .upstream-group h3 {
+    font-size: var(--fs-0);
+    font-weight: 600;
+    color: var(--muted);
+    margin: 0 0 1rem;
+  }
+
+  // name, figures and description under a rule, three to a row on wide screens
   .upstream {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
     gap: 1.25rem 2.5rem;
     list-style: none;
     padding: 0;
-    margin: 0 0 1.5rem;
+    margin: 0;
 
     li {
       border-top: 1px solid var(--border);
@@ -423,9 +439,70 @@
     }
 
     p {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      overflow: hidden;
       margin: 0.4rem 0 0;
       color: var(--muted);
       font-size: var(--fs-0);
+    }
+  }
+
+  // entries past the first rows wait behind a visually hidden checkbox; its label sits under the list
+  .more-toggle {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .upstream .extra {
+    display: none;
+  }
+
+  .more-toggle:checked ~ .upstream .extra {
+    display: block;
+  }
+
+  .more-label {
+    display: inline-block;
+    margin-top: 1.25rem;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: var(--fs-0);
+    color: var(--accent-text);
+
+    &:hover .closed,
+    &:hover .open {
+      text-decoration: underline;
+    }
+
+    .closed::after {
+      content: " \2193";
+    }
+
+    .open {
+      display: none;
+
+      &::after {
+        content: " \2191";
+      }
+    }
+  }
+
+  .more-toggle:focus-visible ~ .more-label {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .more-toggle:checked ~ .more-label {
+    .closed {
+      display: none;
+    }
+
+    .open {
+      display: inline;
     }
   }
 

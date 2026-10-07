@@ -29,7 +29,8 @@ or `nix run .#serve`.
   monochrome SVGs in `static/logos/`, sources in `static/logos/SOURCES.md`.
 - `data/services.toml`: the services list and the grouped skill rows on the landing page.
 - `data/contributions.toml`: upstream contribution figures and the projects shown under
-  "Upstream contributions"; regenerate with `python3 design/contributions.py`.
+  "Upstream contributions", in a major and a popular group; regenerate with
+  `python3 design/contributions.py` (needs `GITHUB_TOKEN` or a logged-in `gh`).
 
 ## Design
 

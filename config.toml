@@ -31,6 +31,7 @@ legal_name = "Franzen Research, Engineering & Development"
 services_line = "Prototyping and embedded development, protocol research, scientific computing, data digitization, electronics repair and modification, infrastructure and validator operations, security and reverse engineering, technical leadership, and teaching."
 email = "contact@fred.build"
 github = "FlorianFranzen"
+contributions_visible = 12 # upstream repositories shown per group before "Show more"; a multiple of three
 linkedin = "FlorianFranzen"
 location = "Zug, Switzerland"
 city = "Zug"
