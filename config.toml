@@ -1,0 +1,53 @@
+base_url = "https://fred.build"
+title = "F.R.E.D."
+description = "F.R.E.D. is a prototype studio in Zug, Switzerland: prototyping and embedded development, protocol research, scientific computing, data digitization, electronics repair and modification, infrastructure and validator operations, security, technical leadership and teaching."
+default_language = "en"
+author = "Florian Franzen"
+
+compile_sass = true
+minify_html = true
+
+# Only the blog has a feed (content/blog/_index.md); no site-wide rss.xml.
+feed_filenames = ["rss.xml"]
+
+taxonomies = [{ name = "tags" }]
+
+[markdown]
+smart_punctuation = true
+external_links_external = false
+
+[markdown.highlighting]
+# Dual theme rendered inline with light-dark(), so no extra stylesheet is needed.
+style = "inline"
+light_theme = "github-light"
+dark_theme = "github-dark"
+error_on_missing_language = true
+
+[link_checker]
+skip_prefixes = ["https://www.linkedin.com", "https://linkedin.com"]
+
+[extra]
+legal_name = "Franzen Research, Engineering & Development"
+services_line = "Prototyping and embedded development, protocol research, scientific computing, data digitization, electronics repair and modification, infrastructure and validator operations, security and reverse engineering, technical leadership, and teaching."
+email = "contact@fred.build"
+github = "FlorianFranzen"
+linkedin = "FlorianFranzen"
+location = "Zug, Switzerland"
+city = "Zug"
+country = "CH"
+founder = "Florian Franzen"
+founder_url = "https://florian.franzen.io"
+# Browser chrome colours; the same values live in sass/_tokens.scss and site.webmanifest.
+theme_light = "#ffffff"
+theme_dark = "#0f0f0f"
+# Accent palette, read by the design/ scripts (logo, favicon, covers, card); sass/_tokens.scss
+# and site.webmanifest repeat it. Marmalade for marks, the bright tone for accent text on dark.
+accent = "#cd5119"
+accent_bright = "#f77745"
+menu = [
+  { name = "Studio", url = "/#studio" },
+  { name = "Clients", url = "/#clients" },
+  { name = "Projects", url = "/projects/" },
+  { name = "Blog", url = "/blog/" },
+  { name = "Contact", url = "/#contact" },
+]

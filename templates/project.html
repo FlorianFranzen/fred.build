@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% import "macros/cards.html" as cards %}
+
+{% block main %}
+<article class="page wrap">
+  <header class="article-head">
+    <div class="meta"><a href="{{ get_url(path="@/projects/_index.md") }}">Projects</a>{% if page.extra.status %}<span class="status" data-status="{{ page.extra.status }}">{{ page.extra.status }}</span>{% endif %}</div>
+    <h1>{{ page.title }}</h1>
+    <p class="lead">{{ page.description }}</p>
+  </header>
+  <dl class="project-meta">
+    {%- if page.extra.role %}<div><dt>Role</dt><dd>{{ page.extra.role }}</dd></div>{% endif %}
+    {%- if page.extra.period %}<div><dt>Period</dt><dd>{{ cards::period(p=page) }}</dd></div>{% endif %}
+    {%- if page.extra.tech %}<div><dt>Stack</dt><dd>{{ page.extra.tech | join(sep=", ") }}</dd></div>{% endif %}
+    {%- if page.extra.repo %}<div><dt>Source</dt><dd><a href="{{ page.extra.repo }}" rel="noopener">{{ page.extra.repo | replace(from="https://", to="") }}</a></dd></div>{% endif %}
+    {%- if page.extra.homepage %}<div><dt>Website</dt><dd><a href="{{ page.extra.homepage }}" rel="noopener">{{ page.extra.homepage | replace(from="https://", to="") }}</a></dd></div>{% endif %}
+  </dl>
+  <figure class="plate">{{ cards::cover(p=page, alt=page.extra.cover_alt | default(value=page.title ~ " mark"), lazy=false) }}</figure>
+  <div class="prose">{{ page.content | safe }}</div>
+  {{ cards::tags(list=page.taxonomies.tags | default(value=[])) }}
+  {%- set blog = get_section(path="blog/_index.md") %}
+  {%- set related = [] %}
+  {%- for p in blog.pages %}{% if p.taxonomies.tags and page.taxonomies.tags %}{% for t in p.taxonomies.tags %}{% if t in page.taxonomies.tags and p not in related %}{% set_global related = related | concat(with=p) %}{% endif %}{% endfor %}{% endif %}{% endfor %}
+  {%- if related | length > 0 %}
+  <section class="related">
+    <h2 class="eyebrow">Posts about this project</h2>
+    <ul class="posts">{% for p in related %}{{ cards::post(p=p) }}{% endfor %}</ul>
+  </section>
+  {%- endif %}
+</article>
+{% endblock main %}

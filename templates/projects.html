@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% import "macros/cards.html" as cards %}
+
+{% block main %}
+<div class="page wrap">
+  {{ cards::page_head(eyebrow="Projects", title=section.title, lead=section.description) }}
+  {%- if section.content %}<div class="prose">{{ section.content | safe }}</div>{% endif %}
+  {%- set statuses = ["active", "maintained", "archived"] %}
+  {%- for status in statuses %}
+    {%- set group = section.pages | filter(attribute="extra.status", value=status) %}
+    {%- if group | length > 0 %}
+  <div class="project-group">
+    <h2 data-status="{{ status }}">{{ status | capitalize }}</h2>
+    <ul class="cards">
+      {%- for p in group %}{{ cards::project(p=p) }}{% endfor %}
+    </ul>
+  </div>
+    {%- endif %}
+  {%- endfor %}
+  {%- set rest = [] %}
+  {%- for p in section.pages %}{% if p.extra.status is undefined or p.extra.status not in statuses %}{% set_global rest = rest | concat(with=p) %}{% endif %}{% endfor %}
+  {%- if rest | length > 0 %}
+  <div class="project-group">
+    <h2>Other</h2>
+    <ul class="cards">{% for p in rest %}{{ cards::project(p=p) }}{% endfor %}</ul>
+  </div>
+  {%- endif %}
+  {% include "partials/contributions.html" %}
+</div>
+{% endblock main %}

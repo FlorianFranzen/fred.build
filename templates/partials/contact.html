@@ -1,0 +1,19 @@
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <h2 class="eyebrow" id="contact-title">Contact</h2>
+    <div class="grid">
+      <address>
+        <a class="big" href="mailto:{{ config.extra.email }}?subject=Project%20inquiry">{{ config.extra.email }}</a>
+        <ul>
+          <li><a class="ext" href="https://github.com/{{ config.extra.github }}" rel="me noopener">GitHub</a></li>
+          <li><a class="ext" href="https://www.linkedin.com/in/{{ config.extra.linkedin }}" rel="me noopener">LinkedIn</a></li>
+          <li><a class="ext" href="{{ config.extra.founder_url }}" rel="me noopener">CV</a></li>
+        </ul>
+      </address>
+      <div>
+        <p>{{ config.extra.legal_name }} is based in {{ config.extra.location }}. The studio works remote-first, with on-site days where hardware demands it.</p>
+        <p>A short note on what you are building and where it is stuck is the best way to start.</p>
+      </div>
+    </div>
+  </div>
+</section>

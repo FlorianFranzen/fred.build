@@ -1,0 +1,11 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© {{ now() | date(format="%Y") }} {{ config.extra.legal_name }} · {{ config.extra.location }}</span>
+    <ul>
+      <li><a href="mailto:{{ config.extra.email }}">{{ config.extra.email }}</a></li>
+      <li><a href="https://github.com/{{ config.extra.github }}" rel="me noopener">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/{{ config.extra.linkedin }}" rel="me noopener">LinkedIn</a></li>
+      <li><a href="{{ get_url(path="blog/rss.xml") }}">RSS</a></li>
+    </ul>
+  </div>
+</footer>

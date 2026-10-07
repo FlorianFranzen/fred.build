@@ -1,0 +1,57 @@
+// Shared pieces used by more than one component.
+
+// Small mono label: eyebrows, status badges, definition terms.
+@mixin label-mono {
+  font-family: var(--mono);
+  font-size: var(--fs-0);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+// A link without underline that takes the accent on hover and focus.
+@mixin quiet-link {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--accent-text);
+  }
+}
+
+// The square marker: the logo's full stop squared, in the accent. Lists and project status.
+@mixin square($size: 0.45em) {
+  content: "";
+  display: inline-block;
+  flex: none;
+  width: $size;
+  height: $size;
+  background: var(--accent);
+}
+
+// Status squares: active filled, maintained half, archived outlined.
+@mixin status-square {
+  &[data-status]::before {
+    @include square(0.6em);
+    margin-right: 0.6em;
+    box-shadow: inset 0 0 0 1.5px var(--accent);
+  }
+
+  &[data-status="maintained"]::before {
+    background: linear-gradient(90deg, var(--accent) 50%, transparent 50%);
+  }
+
+  &[data-status="archived"]::before {
+    background: transparent;
+  }
+}
+
+// The outbound arrow after a link to another site.
+@mixin outbound-arrow {
+  content: "\2197";
+  margin-left: 0.2em;
+  color: var(--accent-text);
+  text-decoration: none;
+}

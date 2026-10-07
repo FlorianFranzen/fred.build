@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% import "macros/cards.html" as cards %}
+
+{% block main %}
+<div class="page wrap">
+  {{ cards::page_head(eyebrow=taxonomy.name | capitalize, title="#" ~ term.name, eyebrow_url="/" ~ taxonomy.name ~ "/") }}
+  <ul class="posts">
+    {%- for p in term.pages %}{{ cards::post(p=p) }}{% endfor %}
+  </ul>
+</div>
+{% endblock main %}

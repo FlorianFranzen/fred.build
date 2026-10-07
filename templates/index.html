@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% import "macros/cards.html" as cards %}
+
+{% block main %}
+{%- set services = load_data(path="data/services.toml") -%}
+{%- set companies = load_data(path="data/companies.toml") -%}
+{%- set projects = get_section(path="projects/_index.md") -%}
+{%- set blog = get_section(path="blog/_index.md") -%}
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="figure">
+    <picture>
+      <source type="image/webp" srcset="/img/hero-600.webp 600w, /img/hero-1000.webp 1000w, /img/hero-1600.webp 1600w, /img/hero-2400.webp 2400w" sizes="100vw">
+      <img src="/img/hero-1600.jpg" width="3784" height="1430" alt="The studio bench: monitor, oscilloscope, a board under test on the soldering mat, cables below the desk" fetchpriority="high" decoding="async">
+    </picture>
+    <div class="wrap overlay">
+      <p class="kicker">{{ config.extra.legal_name }}</p>
+      <h1 id="hero-title">{{ section.extra.headline }}</h1>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="lead">{{ config.extra.services_line }}</p>
+    <div class="btns">
+      <a class="btn" href="mailto:{{ config.extra.email }}?subject=Project%20inquiry">Start a project</a>
+      <a class="btn ghost" href="{{ get_url(path="@/projects/_index.md") }}">See the work</a>
+    </div>
+  </div>
+</section>
+
+<section id="studio" aria-labelledby="studio-title">
+  <div class="wrap">
+    <h2 class="eyebrow" id="studio-title">The studio</h2>
+    <div class="prose studio-text">{{ section.content | safe }}</div>
+    <ul class="services">
+      {%- for s in services.service %}
+      <li><h3>{{ s.title }}</h3><p>{{ s.blurb }}</p></li>
+      {%- endfor %}
+    </ul>
+    <dl class="skills" aria-label="Skills">
+      {%- for g in services.tags %}
+      <div class="skills-row"><dt>{{ g.group }}</dt><dd><ul class="tags">{% for t in g.items %}<li>{{ t }}</li>{% endfor %}</ul></dd></div>
+      {%- endfor %}
+    </dl>
+  </div>
+</section>
+
+<section id="clients" aria-labelledby="clients-title">
+  <div class="wrap">
+    <h2 class="eyebrow" id="clients-title">Clients</h2>
+    <ul class="wall">
+      {%- for c in companies.company %}{{ cards::tile(c=c) }}{% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section id="projects" aria-labelledby="projects-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="eyebrow" id="projects-title">Projects</h2>
+      <a href="{{ projects.permalink }}">All projects →</a>
+    </div>
+    <ul class="cards">
+      {%- for p in projects.pages | filter(attribute="extra.featured", value=true) %}{{ cards::project(p=p) }}{% endfor %}
+    </ul>
+    {%- set contributions_compact = true %}
+    {% include "partials/contributions.html" %}
+  </div>
+</section>
+
+{%- if blog.pages | length > 0 %}
+<section id="blog" aria-labelledby="blog-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="eyebrow" id="blog-title">Blog</h2>
+      <a href="{{ blog.permalink }}">All posts →</a>
+    </div>
+    <ul class="posts">
+      {%- for p in blog.pages | slice(end=3) %}{{ cards::post(p=p) }}{% endfor %}
+    </ul>
+  </div>
+</section>
+{%- endif %}
+
+{% include "partials/contact.html" %}
+{% endblock main %}
+
+{% block scripts %}
+{#- Scroll highlight: every menu item has a section of the same name on this page ("/#studio" and
+    "/projects/" both find id="studio"/"projects"); the last section whose top has passed 40% of the
+    viewport is marked, and the last one once the page is scrolled to the end. Without the script
+    the links simply keep pointing at their pages. -#}
+<script>
+(() => {
+  const pairs = [...document.querySelectorAll(".nav a")]
+    .map(a => [document.getElementById(new URL(a.href).hash.slice(1) || new URL(a.href).pathname.replaceAll("/", "")), a])
+    .filter(([s]) => s);
+  if (!pairs.length) return;
+  let queued = false;
+  const update = () => {
+    queued = false;
+    const atEnd = innerHeight + scrollY >= document.documentElement.scrollHeight - 2;
+    let current = null;
+    for (const [s, a] of pairs) if (s.getBoundingClientRect().top <= innerHeight * 0.4) current = a;
+    if (atEnd) current = pairs[pairs.length - 1][1];
+    for (const [, a] of pairs) a === current ? a.setAttribute("aria-current", "location") : a.removeAttribute("aria-current");
+  };
+  addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+  addEventListener("resize", update);
+  update();
+})();
+</script>
+{% endblock scripts %}

@@ -1,0 +1,6 @@
+{% import "macros/img.html" as img %}
+{#- {{ figure(src="photo.jpg", alt="...", caption="...") }} — src is a file next to the page's index.md -#}
+<figure>
+  {{ img::cover(path=page.colocated_path ~ src, width=900, alt=alt) }}
+  {%- if caption %}<figcaption>{{ caption | markdown(inline=true) | safe }}</figcaption>{% endif %}
+</figure>

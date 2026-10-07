@@ -1,0 +1,12 @@
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="{{ config.title }} home">{{ load_data(path="static/logo.svg") | safe }}</a>
+    <nav aria-label="Main">
+      <ul class="nav">
+        {%- for item in config.extra.menu %}
+        <li><a href="{{ item.url }}"{% if current_path is defined and current_path is starting_with(item.url) and item.url != "/" %} aria-current="page"{% endif %}>{{ item.name }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>

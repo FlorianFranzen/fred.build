@@ -1,0 +1,63 @@
+{#- Head: title, description, canonical, icons, feeds, Open Graph, JSON-LD. -#}
+{% macro meta(page, section) %}
+{%- set is_home = current_path is defined and current_path == "/" -%}
+{%- if page and page.title -%}
+  {%- set title = page.title ~ " · " ~ config.title -%}
+  {%- set description = page.description | default(value=config.description) -%}
+  {%- set url = page.permalink -%}
+{%- elif section and section.title and not is_home -%}
+  {%- set title = section.title ~ " · " ~ config.title -%}
+  {%- set description = section.description | default(value=config.description) -%}
+  {%- set url = section.permalink -%}
+{%- else -%}
+  {%- set title = config.title ~ " · " ~ config.extra.legal_name -%}
+  {%- set description = config.description -%}
+  {%- set url = config.base_url ~ "/" -%}
+{%- endif -%}
+{%- set og_image = get_url(path="og.jpg") -%}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+<meta name="author" content="{{ config.author }}">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="{{ config.extra.theme_light }}">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="{{ config.extra.theme_dark }}">
+<link rel="canonical" href="{{ url }}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/rss+xml" title="{{ config.title }} blog" href="{{ get_url(path="blog/rss.xml") }}">
+<link rel="preload" href="{{ get_url(path="fonts/inter-400.woff2") }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ get_url(path="fonts/inter-800.woff2") }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ get_url(path="main.css", cachebust=true) }}">
+<meta property="og:site_name" content="{{ config.title }}">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:url" content="{{ url }}">
+<meta property="og:image" content="{{ og_image }}">
+<meta property="og:locale" content="en_US">
+{%- if page and page.date %}
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="{{ page.date | date(format="%Y-%m-%d") }}">
+{%- if page.updated %}
+<meta property="article:modified_time" content="{{ page.updated | date(format="%Y-%m-%d") }}">
+{%- endif %}
+{%- else %}
+<meta property="og:type" content="website">
+{%- endif %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ title }}">
+<meta name="twitter:description" content="{{ description }}">
+<meta name="twitter:image" content="{{ og_image }}">
+{%- set same_as = '["https://github.com/' ~ config.extra.github ~ '","https://www.linkedin.com/in/' ~ config.extra.linkedin ~ '"]' %}
+{%- if is_home %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"{{ config.title }}","legalName":"{{ config.extra.legal_name }}","url":"{{ config.base_url }}/","logo":"{{ get_url(path="icon-512.png") }}","image":"{{ og_image }}","description":"{{ config.description }}","email":"{{ config.extra.email }}","address":{"@type":"PostalAddress","addressLocality":"{{ config.extra.city }}","addressCountry":"{{ config.extra.country }}"},"founder":{"@type":"Person","name":"{{ config.extra.founder }}","url":"{{ config.extra.founder_url }}","sameAs":{{ same_as | safe }}},"sameAs":{{ same_as | safe }}}
+</script>
+{%- elif page and page.date %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"{{ page.title }}","description":"{{ description }}","datePublished":"{{ page.date | date(format="%Y-%m-%d") }}",{% if page.updated %}"dateModified":"{{ page.updated | date(format="%Y-%m-%d") }}",{% endif %}"image":"{{ og_image }}","url":"{{ url }}","mainEntityOfPage":"{{ url }}","author":{"@type":"Person","name":"{{ config.extra.founder }}","url":"{{ config.extra.founder_url }}"},"publisher":{"@type":"Organization","name":"{{ config.title }}","url":"{{ config.base_url }}/"}}
+</script>
+{%- endif %}
+{% endmacro meta %}

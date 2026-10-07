@@ -1,0 +1,73 @@
+# Services and skills shown on the landing page. Derived from the CV (the F.R.E.D. entry, the
+# employed and freelance roles, the skills section and the extended sections) and its git
+# history, which holds the skills that were trimmed from the printed version over the years.
+
+[[service]]
+title = "Prototyping and embedded development"
+blurb = "Schematic and PCB in KiCad, then the firmware and host software that make the first unit useful: ESP32, Teensy and other microcontrollers, CAN, I²C and SPI, real-time Linux, bring-up and board support."
+
+[[service]]
+title = "Protocol research and specification"
+blurb = "Specifications that independent teams can implement, with conformance tests to prove it; consensus and cryptography reviews; tokenomics and game-theory checks before a design ships to mainnet."
+
+[[service]]
+title = "Scientific computing and computer vision"
+blurb = "Acquisition, analysis pipelines and machine learning on the data a lab or product actually produces: electrophysiology, spike sorting, 3-D reconstruction from video, GPU-accelerated where it pays."
+
+[[service]]
+title = "Data digitization"
+blurb = "Analogue tape recovered into clean digital archives: the RF signal captured with CXADC and decoded with VHS-Decode instead of a capture card, dropouts repaired in software, every file checksummed and documented."
+
+[[service]]
+title = "Electronics repair, modification and refurbishment"
+blurb = "Component-level repair of lab and studio equipment; consoles and other consumer hardware recapped, modded and upgraded with modchips, HDMI and flash: the work nobody writes service manuals for."
+
+[[service]]
+title = "Infrastructure and validator operations"
+blurb = "NixOS-declared bare metal and cloud, Kubernetes, CI/CD and the networks underneath; validators and RPC nodes for Substrate and Solana with offline keys. Monitored, documented, handed over runnable."
+
+[[service]]
+title = "Security and reverse engineering"
+blurb = "Hardening and incident response in operations; binary analysis with Ghidra and IDA Pro, fuzzing and protocol dissection in research; consumer hardware reverse-engineered so it can be extended."
+
+[[service]]
+title = "Technical leadership and due diligence"
+blurb = "The technical side of product strategy: roadmaps, hiring, partner and exchange integrations; research and code reviews for investors and product teams, and the articles and specifications that follow."
+
+[[service]]
+title = "Teaching and workshops"
+blurb = "Cryptography, economics and blockchain at the Polkadot Blockchain Academy; 3-D printing, CAD and microcontrollers for TReND in Africa; tutoring and lab courses before that."
+
+# Skills, grouped like the CV, most-used first within each group. Items the printed CV dropped
+# to save space are back here.
+[[tags]]
+group = "Languages"
+items = ["Rust", "C/C++", "Python", "Go", "TypeScript", "Haskell", "JavaScript", "Java", "SQL", "Bash", "Matlab", "Julia", "Ruby", "Lisp"]
+
+[[tags]]
+group = "Blockchain"
+items = ["Substrate", "Polkadot", "PolkaVM", "Solana", "Anchor", "Ethereum", "Solidity", "Hardhat", "WASM", "MEV", "Cryptography", "Tokenomics", "libp2p", "IPFS"]
+
+[[tags]]
+group = "Frameworks"
+items = ["Tokio", "Tonic", "Qt", "Boost", "Asio", "JUCE", "OpenCV", "NumPy", "Jupyter", "Kaitai Struct", "ROS"]
+
+[[tags]]
+group = "Infrastructure"
+items = ["Nix/NixOS", "Linux (Debian, Arch)", "macOS", "Windows", "Kubernetes", "Helm", "Docker/Podman", "Ansible", "CI/CD", "Networking", "Cisco", "Active Directory"]
+
+[[tags]]
+group = "Hardware"
+items = ["KiCad", "ESP32", "Teensy", "Arduino", "CAN", "I²C/SPI", "RT-Linux", "Soldering", "3D printing", "OpenSCAD", "Blender", "Smart cards", "CXADC", "VHS-Decode", "Console modding"]
+
+[[tags]]
+group = "Web"
+items = ["TypeScript", "React", "GraphQL", "HTML/CSS", "Zola", "Hugo", "Jekyll", "jQuery"]
+
+[[tags]]
+group = "Tooling"
+items = ["Git", "SVN", "CMake", "Ghidra", "IDA Pro", "Fuzzing", "AsciiDoc", "Doxygen", "LaTeX", "Homebrew", "DataJoint"]
+
+[[tags]]
+group = "Science"
+items = ["ROCm", "Ollama", "LSD-SLAM", "Bayesian modelling", "Spike sorting", "Electrophysiology"]

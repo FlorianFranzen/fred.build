@@ -1,0 +1,572 @@
+@use "mixins" as *;
+
+// Buttons ---------------------------------------------------------------
+.btns {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--accent-fill);
+  color: var(--on-accent);
+  padding: 0.65rem 1.1rem;
+  font-weight: 600;
+  font-size: var(--fs-0);
+  text-decoration: none;
+  border: 1px solid var(--accent-fill);
+
+  &:hover {
+    color: var(--on-accent);
+    filter: brightness(0.92);
+  }
+
+  &.ghost {
+    background: transparent;
+    color: var(--accent-text);
+
+    &:hover {
+      background: var(--accent-fill);
+      color: var(--on-accent);
+    }
+  }
+}
+
+// Shared small pieces ---------------------------------------------------------
+.status {
+  @include label-mono;
+  @include status-square;
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent-text);
+  white-space: nowrap;
+}
+
+.role,
+.count {
+  font-family: var(--mono);
+  font-size: var(--fs-0);
+  color: var(--muted);
+}
+
+// Link to another site, with the outbound arrow
+.ext {
+  @include quiet-link;
+  font-size: var(--fs-0);
+  white-space: nowrap;
+
+  &::after {
+    @include outbound-arrow;
+  }
+}
+
+.cover {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+}
+
+// Services ---------------------------------------------------------------
+.services {
+  display: grid;
+  // nine services: three columns, or one; two would leave the last one alone
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem 2.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 2.5rem 0;
+
+  li {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  h3 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6em;
+    font-size: var(--fs-1);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+
+    &::before {
+      @include square(0.4em);
+      transform: translateY(-0.1em);
+    }
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted);
+    font-size: var(--fs-0);
+  }
+
+  @media (max-width: 52rem) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: var(--fs-0);
+  color: var(--muted);
+
+  li:not(:has(> a))::before,
+  a::before {
+    content: "#";
+    opacity: 0.6;
+  }
+
+  a {
+    @include quiet-link;
+    padding-inline: 0.2em;
+    margin-inline: -0.2em;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--fg);
+      background: var(--accent-tint);
+    }
+  }
+
+  &.below {
+    margin-top: 2rem;
+  }
+}
+
+// Skills, grouped like the CV -------------------------------------------------
+.skills {
+  margin: 0;
+  border-top: 1px solid var(--border);
+
+  .skills-row {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 0.5rem 1.5rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  dt {
+    @include label-mono;
+    padding-top: 0.1rem;
+  }
+
+  dd {
+    margin: 0;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 40rem) {
+  .skills .skills-row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+}
+
+// Clients wall ---------------------------------------------------------------
+// Inline monochrome SVGs: they take the text colour and follow the colour scheme.
+.wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 1.5rem 2.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tile {
+  border-top: 1px solid var(--border);
+  min-width: 0;
+
+  > a,
+  > span {
+    display: flex;
+    align-items: center;
+    height: 5.5rem;
+    color: var(--fg);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.15s, color 0.15s;
+  }
+
+  // the logos are marks, so they take the accent itself (the same in both themes), not the
+  // text tone; the name beside an abstract mark goes with it
+  > a:hover,
+  > a:focus-visible {
+    opacity: 1;
+    color: var(--accent);
+  }
+
+  // --size scales the mark so wordmarks and compact icons look the same weight
+  svg {
+    display: block;
+    width: 100%;
+    max-height: calc(2.75rem * var(--size, 1));
+    height: auto;
+  }
+
+  // a company without a logo file
+  .tile-name {
+    font-weight: 700;
+    font-size: var(--fs-2);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  // abstract mark + company name as a lockup
+  &.labelled > a,
+  &.labelled > span {
+    gap: 0.75rem;
+  }
+
+  &.labelled svg {
+    width: auto;
+    height: calc(2.75rem * var(--size, 1));
+    flex: none;
+  }
+
+  .tile-label {
+    font-weight: 700;
+    font-size: var(--fs-1);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+}
+
+// Project cards -----------------------------------------------------------
+.project-group + .project-group {
+  margin-top: 3rem;
+}
+
+.project-group h2 {
+  @include status-square;
+  display: flex;
+  align-items: center;
+  font-size: var(--fs-0);
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 2rem 2.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  h3 {
+    font-size: var(--fs-2);
+    margin: 0;
+
+    a {
+      @include quiet-link;
+    }
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .card-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: baseline;
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+
+  .cover {
+    aspect-ratio: 5 / 2;
+    object-fit: cover;
+  }
+}
+
+// Project page -----------------------------------------------------------
+.project-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, max-content));
+  gap: 1rem 3rem;
+  margin: 0 0 2.5rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  font-size: var(--fs-0);
+
+  div {
+    min-width: 0;
+  }
+
+  dt {
+    @include label-mono;
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  dd {
+    margin: 0;
+  }
+}
+
+.plate {
+  margin: 0 0 2.5rem;
+  max-width: var(--measure);
+}
+
+.related {
+  margin-top: 3rem;
+}
+
+// Upstream contributions ------------------------------------------------------
+.contributions {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+
+  // landing page: figures only, under the featured projects
+  &.compact {
+    margin-top: 3.5rem;
+
+    .figures {
+      margin: 0;
+    }
+  }
+
+  .intro {
+    color: var(--muted);
+    max-width: var(--measure);
+  }
+
+  .figures {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 1rem 2rem;
+    margin: 1.5rem 0 2rem;
+
+    div {
+      border-top: 1px solid var(--border);
+      padding-top: 0.75rem;
+    }
+
+    dt {
+      @include label-mono;
+    }
+
+    dd {
+      margin: 0.2rem 0 0;
+      font-size: var(--fs-4);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  .upstream {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1.25rem 2.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+
+    li {
+      border-top: 1px solid var(--border);
+      padding-top: 0.75rem;
+      min-width: 0;
+    }
+
+    a {
+      @include quiet-link;
+    }
+
+    .name {
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .stat {
+      display: block;
+      font-family: var(--mono);
+      font-size: var(--fs-0);
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    p {
+      margin: 0.4rem 0 0;
+      color: var(--muted);
+      font-size: var(--fs-0);
+    }
+  }
+
+  .more {
+    font-size: var(--fs-0);
+    margin: 0;
+  }
+
+  .muted {
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+}
+
+// Post list -----------------------------------------------------------------
+.posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: var(--measure);
+}
+
+.post-item {
+  border-top: 1px solid var(--border);
+  padding-block: 1.25rem;
+
+  h3 {
+    font-size: var(--fs-2);
+    margin: 0.25rem 0 0.4rem;
+
+    a {
+      @include quiet-link;
+    }
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted);
+  }
+}
+
+.meta {
+  font-family: var(--mono);
+  font-size: var(--fs-0);
+  color: var(--muted);
+  display: flex;
+  gap: 0.35rem 1rem;
+  flex-wrap: wrap;
+  align-items: baseline;
+
+  time {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+// Article -----------------------------------------------------------------
+.article-head {
+  max-width: var(--measure);
+  margin-bottom: 2.5rem;
+
+  h1 {
+    font-size: var(--fs-3);
+    margin: 0.75rem 0;
+  }
+
+  .lead {
+    color: var(--muted);
+    font-size: var(--fs-2);
+    line-height: 1.45;
+    margin: 0 0 1rem;
+  }
+}
+
+.article-foot {
+  max-width: var(--measure);
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: var(--fs-0);
+
+  a {
+    @include quiet-link;
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+  font-family: var(--mono);
+  font-size: var(--fs-0);
+
+  a {
+    @include quiet-link;
+  }
+}
+
+// Contact -----------------------------------------------------------------
+.contact {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 2rem 3rem;
+  }
+
+  address {
+    font-style: normal;
+  }
+
+  .big {
+    @include quiet-link;
+    font-size: var(--fs-3);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    word-break: break-word;
+    line-height: 1.15;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: flex;
+    gap: 0.5rem 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  p {
+    color: var(--muted);
+    max-width: 40ch;
+  }
+}
+
+.empty {
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  max-width: var(--measure);
+}

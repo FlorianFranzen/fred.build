@@ -1,0 +1,9 @@
+// fred.build — one stylesheet, Swiss minimal.
+// Tokens come from design/round3.html (S3): white / near-black grounds, one red accent,
+// hairline rules instead of cards, Inter for text and JetBrains Mono for labels and code.
+
+@use "tokens";
+@use "fonts";
+@use "base";
+@use "layout";
+@use "components";

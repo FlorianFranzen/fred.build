@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% import "macros/cards.html" as cards %}
+
+{% block main %}
+<article class="page wrap">
+  <header class="article-head">
+    <div class="meta">
+      <a href="{{ get_url(path="@/blog/_index.md") }}">Blog</a>
+      <time datetime="{{ page.date | date(format="%Y-%m-%d") }}">{{ page.date | date(format="%-d %B %Y") }}</time>
+      <span>{{ page.reading_time }} min read</span>
+    </div>
+    <h1>{{ page.title }}</h1>
+    {%- if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
+  </header>
+  <div class="prose">{{ page.content | safe }}</div>
+  {{ cards::tags(list=page.taxonomies.tags | default(value=[])) }}
+  <nav class="article-foot" aria-label="Neighbouring posts">
+    <span>{% if page.higher %}<a href="{{ page.higher.permalink }}">← {{ page.higher.title }}</a>{% endif %}</span>
+    <span>{% if page.lower %}<a href="{{ page.lower.permalink }}">{{ page.lower.title }} →</a>{% endif %}</span>
+  </nav>
+</article>
+{% endblock main %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% import "macros/cards.html" as cards %}
+
+{% block main %}
+<div class="page wrap">
+  {{ cards::page_head(eyebrow="Blog", title=section.title, lead=section.description) }}
+  {%- if paginator.pages | length > 0 %}
+  <ul class="posts">
+    {%- for p in paginator.pages %}{{ cards::post(p=p) }}{% endfor %}
+  </ul>
+  {%- if paginator.number_pagers > 1 %}
+  <nav class="pagination" aria-label="Pages">
+    <span>{% if paginator.previous %}<a href="{{ paginator.previous }}">← Newer</a>{% endif %}</span>
+    <span>{{ paginator.current_index }} / {{ paginator.number_pagers }}</span>
+    <span>{% if paginator.next %}<a href="{{ paginator.next }}">Older →</a>{% endif %}</span>
+  </nav>
+  {%- endif %}
+  {%- else %}
+  <p class="empty">No posts yet. The first project reports are in preparation; subscribe to the <a href="{{ get_url(path="blog/rss.xml") }}">feed</a> to get them.</p>
+  {%- endif %}
+</div>
+{% endblock main %}

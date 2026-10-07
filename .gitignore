@@ -1,0 +1,8 @@
+public/
+result
+result-*
+.direnv/
+
+# Caches
+__pycache__/
+static/processed_images/

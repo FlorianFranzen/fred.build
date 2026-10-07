@@ -1,0 +1,6 @@
+{#- Responsive image from a colocated asset: WebP at 1x and 2x of `width`, lazy by default. -#}
+{% macro cover(path, width, alt, class="", lazy=true) %}
+{%- set one = resize_image(path=path, width=width, op="fit_width", format="webp", quality=80) -%}
+{%- set two = resize_image(path=path, width=width * 2, op="fit_width", format="webp", quality=78) -%}
+<img src="{{ one.url }}" srcset="{{ one.url }} {{ one.width }}w, {{ two.url }} {{ two.width }}w" sizes="(max-width: 48rem) 100vw, {{ width }}px" width="{{ one.width }}" height="{{ one.height }}" alt="{{ alt }}"{% if class %} class="{{ class }}"{% endif %}{% if lazy %} loading="lazy" decoding="async"{% else %} fetchpriority="high"{% endif %}>
+{%- endmacro cover %}

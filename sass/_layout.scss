@@ -1,0 +1,280 @@
+@use "mixins" as *;
+
+.wrap {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+// Header ---------------------------------------------------------------
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+
+  .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    flex-wrap: wrap;
+    padding-block: 1rem;
+  }
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+
+  svg {
+    display: block;
+    height: 1.125rem;
+    width: auto;
+  }
+
+  svg .d {
+    fill: var(--accent);
+  }
+
+  &:hover svg path:first-of-type {
+    fill: var(--accent);
+  }
+}
+
+// Inter caps separated by small accent squares (the logo's dots); the current page (or, on the
+// landing page, the section in view, set by the scroll highlight in index.html) turns accent.
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-0);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  li {
+    display: flex;
+    align-items: center;
+  }
+
+  li + li::before {
+    @include square(0.3em);
+    margin-inline: 0.95rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--fg);
+    padding-block: 0.25rem;
+    transition: color 0.15s;
+
+    &:hover,
+    &[aria-current] {
+      color: var(--accent-text);
+    }
+  }
+  // one line on phones: tighter tracking and slashes, smaller caps below 25rem
+  @media (max-width: 40rem) {
+    letter-spacing: 0.05em;
+
+    li + li::before {
+      margin-inline: 0.55rem;
+    }
+  }
+
+  @media (max-width: 25rem) {
+    font-size: 0.6875rem;
+
+    li + li::before {
+      margin-inline: 0.4rem;
+    }
+  }
+}
+
+// Sections ---------------------------------------------------------------
+main > section,
+.page {
+  padding-block: var(--section);
+}
+
+main > section + section {
+  border-top: 1px solid var(--border);
+}
+
+.eyebrow {
+  @include label-mono;
+  letter-spacing: 0.12em;
+  margin: 0 0 1.5rem;
+
+  a {
+    @include quiet-link;
+  }
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+
+  .eyebrow {
+    margin: 0;
+  }
+
+  a {
+    font-size: var(--fs-0);
+  }
+}
+
+// Hero ---------------------------------------------------------------
+// Photo with a fade into the page background; only the kicker and the title sit on the
+// photo, the lead and the buttons follow below it (design/round3.html, effect E7).
+.hero {
+  padding-block: 0 var(--section);
+
+  .figure {
+    position: relative;
+    margin: 0;
+
+    img {
+      width: 100%;
+      aspect-ratio: 3784 / 1430;
+      max-height: 72vh; // on very large screens the band is cropped rather than towering
+      object-fit: cover;
+    }
+
+    picture {
+      display: block;
+      position: relative;
+    }
+
+    picture::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 25%, var(--bg) 100%);
+      pointer-events: none;
+    }
+  }
+
+  .overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    padding-bottom: 0.25rem;
+  }
+
+  .kicker {
+    font-family: var(--mono);
+    // scales with the viewport so the full company name stays on one line down to 320px
+    font-size: clamp(0.6rem, 2.9vw, 0.875rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    margin: 0 0 0.6rem;
+  }
+
+  h1 {
+    margin: 0;
+    max-width: 30ch; // one line where it fits, balanced two lines where it does not
+  }
+
+  .lead {
+    font-size: var(--fs-2);
+    line-height: 1.45;
+    color: var(--muted);
+    max-width: 48ch;
+    margin: 1.5rem 0 1.75rem;
+    text-wrap: pretty;
+  }
+}
+
+@media (max-width: 40rem) {
+  // The band is too short to carry the title on a phone: fade stays, title moves below.
+  .hero .figure picture::after {
+    background: linear-gradient(to bottom, transparent 55%, var(--bg) 100%);
+  }
+
+  .hero .overlay {
+    position: static;
+    margin-top: 1.25rem;
+    padding-bottom: 0;
+  }
+
+  .hero .lead {
+    margin-top: 1rem;
+  }
+}
+
+// Studio text: flows into two columns when the wrap is wide enough, each column
+// staying within a readable measure; one column below that.
+.studio-text {
+  max-width: none;
+  columns: 2 30rem;
+  column-gap: 3rem;
+
+  p {
+    margin-top: 0;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Footer ---------------------------------------------------------------
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding-block: 2rem;
+  font-size: var(--fs-0);
+  color: var(--muted);
+  font-family: var(--mono);
+
+  .wrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    flex-wrap: wrap;
+  }
+
+  a {
+    @include quiet-link;
+  }
+
+  ul {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+// Generic page / list ---------------------------------------------------
+.page-head {
+  margin-bottom: 2.5rem;
+  max-width: var(--measure);
+
+  .eyebrow {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: var(--muted);
+    font-size: var(--fs-2);
+    line-height: 1.45;
+    margin: 0;
+  }
+}

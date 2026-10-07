@@ -1,0 +1,86 @@
+# Companies wall: logos only, one neutral group, newest relationship first.
+# label: also print the name next to the mark (for abstract marks without a wordmark).
+# size: optical scale of the mark relative to the default height (compact icons > 1, heavy wordmarks < 1).
+# logo: file in static/logos/ (monochrome SVG with fill="currentColor", see design/clean-logo.py
+# and static/logos/SOURCES.md). Without a logo the name is shown as text.
+
+[[company]]
+name = "Gluwa"
+url = "https://gluwa.com"
+logo = "gluwa.svg"
+size = 1.15
+label = true
+
+[[company]]
+name = "Raiku"
+url = "https://raiku.com"
+logo = "raiku.svg"
+size = 1.1
+label = true
+
+[[company]]
+name = "Analog"
+url = "https://analog.one"
+logo = "analog.svg"
+
+[[company]]
+name = "Flowra"
+url = "https://flowra.wtf"
+logo = "flowra.svg"
+size = 1.3
+label = true
+
+[[company]]
+name = "Web3 Foundation"
+url = "https://web3.foundation"
+logo = "web3-foundation.svg"
+size = 1.3
+
+[[company]]
+name = "White Matter"
+url = "https://white-matter.com"
+logo = "white-matter.svg"
+size = 0.9
+label = true
+
+[[company]]
+name = "Max Planck Institute for Neurobiology of Behavior – caesar"
+url = "https://mpinb.mpg.de"
+logo = "mpinb.svg"
+size = 1.5
+
+[[company]]
+name = "Blackrock Neurotech"
+url = "https://blackrockneurotech.com"
+logo = "blackrock-neurotech.svg"
+
+[[company]]
+name = "Parity Technologies"
+url = "https://www.parity.io"
+logo = "parity.svg"
+size = 0.9
+
+[[company]]
+name = "Polkadot Blockchain Academy"
+url = "https://polkadot.academy"
+logo = "polkadot-academy.svg"
+size = 1.15
+
+[[company]]
+name = "LMU Munich"
+url = "https://www.lmu.de"
+logo = "lmu.svg"
+size = 1.5
+label = true
+
+[[company]]
+name = "TReND in Africa"
+url = "https://trendinafrica.org"
+logo = "trend-in-africa.svg"
+size = 1.6
+
+[[company]]
+name = "CIN, University of Tübingen"
+url = "https://uni-tuebingen.de/forschung/forschungsschwerpunkte/cin/"
+logo = "cin.svg"
+size = 1.5

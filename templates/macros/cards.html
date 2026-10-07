@@ -1,0 +1,73 @@
+{#- A company tile: the logo inlined as monochrome SVG so it follows the text colour. -#}
+{% macro tile(c) %}
+<li class="tile{% if c.label %} labelled{% endif %}"{% if c.size %} style="--size:{{ c.size }}"{% endif %}>
+  {%- if c.url %}<a href="{{ c.url }}" rel="noopener" aria-label="{{ c.name }}">{% else %}<span role="img" aria-label="{{ c.name }}">{% endif %}
+  {%- if c.logo %}
+  {{ load_data(path="static/logos/" ~ c.logo) | safe }}
+  {%- if c.label %}<span class="tile-label">{{ c.name }}</span>{% endif %}
+  {%- else %}
+  <span class="tile-name">{{ c.name }}</span>
+  {%- endif %}
+  {%- if c.url %}</a>{% else %}</span>{% endif %}
+</li>
+{% endmacro tile %}
+
+{#- The cover plate of a project page (content/projects/<slug>/cover.svg). -#}
+{% macro cover(p, alt="", lazy=true) %}
+{%- for a in p.assets %}{% if a is ending_with("cover.svg") %}
+<img src="{{ get_url(path=a, cachebust=true) }}" width="1000" height="400" alt="{{ alt }}" class="cover"{% if lazy %} loading="lazy" decoding="async"{% endif %}>
+{%- endif %}{% endfor %}
+{% endmacro cover %}
+
+{#- A project's period; an open end ("2021–") is closed with the current year. -#}
+{% macro period(p) %}
+{%- set span = p.extra.period | default(value="") -%}
+{%- if span is ending_with("–") -%}
+  {%- set start = span | trim_end_matches(pat="–") -%}
+  {%- set year = now() | date(format="%Y") -%}
+  {%- if start == year %}{{ year }}{% else %}{{ start }}–{{ year }}{% endif -%}
+{%- else -%}{{ span }}{%- endif -%}
+{% endmacro period %}
+
+{#- A project card from a page in content/projects. -#}
+{% macro project(p) %}
+<li class="card">
+  <a href="{{ p.permalink }}" tabindex="-1" aria-hidden="true">{{ self::cover(p=p) }}</a>
+  <div class="card-top">
+    <h3><a href="{{ p.permalink }}">{{ p.title }}</a></h3>
+    {%- if p.extra.status %}<span class="status" data-status="{{ p.extra.status }}">{{ p.extra.status }}</span>{% endif %}
+  </div>
+  <p>{{ p.description }}</p>
+  <div class="card-foot">
+    {%- if p.extra.role %}<span class="role">{{ p.extra.role }}{% if p.extra.period %} · {{ self::period(p=p) }}{% endif %}</span>{% endif %}
+    {%- if p.extra.repo %}<a class="ext" href="{{ p.extra.repo }}" rel="noopener">Source</a>{% endif %}
+  </div>
+</li>
+{% endmacro project %}
+
+{#- A blog list entry; projects (no date) get a "Project" label instead. -#}
+{% macro post(p) %}
+<li class="post-item">
+  <div class="meta">{% if p.date %}<time datetime="{{ p.date | date(format="%Y-%m-%d") }}">{{ p.date | date(format="%Y-%m-%d") }}</time><span>{{ p.reading_time }} min read</span>{% else %}<span>Project</span>{% endif %}</div>
+  <h3><a href="{{ p.permalink }}">{{ p.title }}</a></h3>
+  <p>{{ p.description | default(value=p.summary | default(value="") | striptags) }}</p>
+</li>
+{% endmacro post %}
+
+{#- The tag list under a post or project. -#}
+{% macro tags(list) %}
+{%- if list %}
+<ul class="tags below">
+  {%- for t in list %}<li><a href="{{ get_taxonomy_url(kind="tags", name=t) }}">{{ t }}</a></li>{% endfor %}
+</ul>
+{%- endif %}
+{% endmacro tags %}
+
+{#- Page head for list pages: eyebrow, title, lead. -#}
+{% macro page_head(eyebrow, title, lead="", eyebrow_url="") %}
+<div class="page-head">
+  <p class="eyebrow">{% if eyebrow_url %}<a href="{{ eyebrow_url }}">{{ eyebrow }}</a>{% else %}{{ eyebrow }}{% endif %}</p>
+  <h1>{{ title }}</h1>
+  {%- if lead %}<p>{{ lead }}</p>{% endif %}
+</div>
+{% endmacro page_head %}

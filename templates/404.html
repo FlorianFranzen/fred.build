@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% import "macros/cards.html" as cards %}
+
+{% block main %}
+<div class="page wrap">
+  {{ cards::page_head(eyebrow="404", title="Nothing at this address.") }}
+  <p class="prose">The page may have moved while the site was rebuilt. Try the <a href="/">front page</a>, the <a href="{{ get_url(path="@/projects/_index.md") }}">projects</a> or the <a href="{{ get_url(path="@/blog/_index.md") }}">blog</a>.</p>
+</div>
+{% endblock main %}
