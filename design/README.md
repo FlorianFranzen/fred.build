@@ -15,7 +15,7 @@ edit there, one in `sass/_tokens.scss` (palette) and one in `static/site.webmani
 | `build-og.py` | Renders the Open Graph image `static/og.jpg` (1200 × 630): hero band with a fade, the wordmark, headline and location. |
 | `build-plates.py` | Draws the 5:2 cover plates `content/projects/*/cover.svg`: surface colour, mark in the text colour, accent as a detail, light/dark via a media query inside the SVG. Never run `svgo` on the plates: it inlines the `svg{--bg…}` rule as a style attribute, which overrides the dark-mode rule. |
 | `clean-logo.py` | Reduces a client logo to one `currentColor` fill and minifies it with `svgo` when available. Sources of every logo are in `static/logos/SOURCES.md`. |
-| `contributions.py` | Collects the upstream pull-request record from the GitHub search API into `data/contributions.toml`; hand-maintained `[[manual]]` entries survive a rerun. |
+| `contributions.py` | Collects upstream pull requests (REST search) and credited commits (GraphQL, needs `GITHUB_TOKEN` or a logged-in `gh`) into `data/contributions.toml`, sorted into major and popular repositories; `[[manual]]` entries and `hide` / `pinned` flags survive a rerun. |
 | `cards/` | The card as written by `build-cards.py`; `card.pdf` goes to the printer. |
 | `logo/` | Reference copies of the wordmark and favicon written by `build-assets.py`. |
 | `marks/` | Third-party marks placed on plates (Nix snowflake, Polkadot, Open Ephys, the Mind the Gap mark from its own repository). |
