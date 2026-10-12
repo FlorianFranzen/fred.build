@@ -118,6 +118,12 @@ main > section + section {
   }
 }
 
+.section-note {
+  color: var(--muted);
+  max-width: var(--measure);
+  margin: -0.75rem 0 1.5rem;
+}
+
 .section-head {
   display: flex;
   justify-content: space-between;

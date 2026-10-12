@@ -59,6 +59,7 @@
       <h2 class="eyebrow" id="projects-title">Projects</h2>
       <a href="{{ projects.permalink }}">All projects →</a>
     </div>
+    <p class="section-note">A public selection; most client work is private.</p>
     <ul class="cards">
       {%- for p in projects.pages | filter(attribute="extra.featured", value=true) %}{{ cards::project(p=p) }}{% endfor %}
     </ul>

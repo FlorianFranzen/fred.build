@@ -1,8 +1,9 @@
 # fred.build
 
-Website of **F.R.E.D.** (Franzen Research, Engineering & Development), a prototype studio in
-Zug. Static site built with [Zola](https://www.getzola.org), one stylesheet, and one small inline script
-(the scroll highlight in the menu on the landing page; everything works without it).
+Website of **F.R.E.D.** (Franzen Research, Engineering & Development), a studio for technical
+leadership and engineering in Zug. Static site built with [Zola](https://www.getzola.org), one
+stylesheet, and one small inline script (the scroll highlight in the menu on the landing page;
+everything works without it).
 
 ## Develop
 

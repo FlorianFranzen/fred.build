@@ -1,6 +1,6 @@
 base_url = "https://fred.build"
 title = "F.R.E.D."
-description = "F.R.E.D. is a prototype studio in Zug, Switzerland: prototyping and embedded development, protocol research, scientific computing, data digitization, electronics repair and modification, infrastructure and validator operations, security, technical leadership and teaching."
+description = "F.R.E.D. is a studio for technical leadership and engineering in Zug, Switzerland: technical leadership and architecture, protocol research, infrastructure and validator operations, security, prototyping and embedded development, scientific computing, teaching, data digitization, and electronics repair and modification."
 default_language = "en"
 author = "Florian Franzen"
 
@@ -28,7 +28,7 @@ skip_prefixes = ["https://www.linkedin.com", "https://linkedin.com"]
 
 [extra]
 legal_name = "Franzen Research, Engineering & Development"
-services_line = "Prototyping and embedded development, protocol research, scientific computing, data digitization, electronics repair and modification, infrastructure and validator operations, security and reverse engineering, technical leadership, and teaching."
+services_line = "Technical leadership and architecture, protocol research and specification, infrastructure and validator operations, security and reverse engineering; backed by prototyping and embedded development, scientific computing, teaching, data digitization, and electronics repair."
 email = "contact@fred.build"
 github = "FlorianFranzen"
 contributions_visible = 12 # upstream repositories shown per group before "Show more"; a multiple of three

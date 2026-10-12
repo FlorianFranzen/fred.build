@@ -2,7 +2,7 @@
 # entries, `hide = true`, `pinned = true` (keeps the `category` you set) and `summary` (shown instead
 # of the description) by hand; everything else is overwritten on the next run.
 generated = 2026-10-08
-intro = "Most of the studio's code lands in other people's repositories. The numbers are generated from the public record on GitHub, pull requests and credited commits; a few contributions on other forges are listed by hand."
+intro = "Most of the studio's public code lands in other people's repositories. The numbers are generated from the public record on GitHub, pull requests and credited commits; a few contributions on other forges are listed by hand."
 
 [totals]
 prs = 548
