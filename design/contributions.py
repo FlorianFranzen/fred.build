@@ -6,7 +6,7 @@ data/contributions.toml, which templates/partials/contributions.html renders.
     GITHUB_TOKEN=... python3 design/contributions.py
 
 Two sources are combined per repository: pull requests authored by the GitHub user (REST search,
-for opened / merged counts) and the commits credited to the user on each repository's default
+for opened / merged counts; pull requests the user closed again unmerged are left out) and the commits credited to the user on each repository's default
 branch (GraphQL contributionsCollection, one query per year). The second catches work that landed
 without a merged pull request, e.g. Homebrew's cherry-picked commits. Forks, private repositories
 and the studio's own accounts are left out. A repository counts once something landed there.
@@ -80,6 +80,27 @@ def clean(desc, name):
 print("searching pull requests…", file=sys.stderr)
 prs = [pr for pr in search(f"author:{USER} type:pr") if not own(pr["repository_url"].split("/repos/")[1])]
 time.sleep(PAUSE)
+
+# pull requests the user closed again without a merge (withdrawn, superseded) do not count
+WITHDRAWN = """
+query($q: String!, $after: String) {
+  search(query: $q, type: ISSUE, first: 40, after: $after) {
+    pageInfo { hasNextPage endCursor }
+    nodes { ... on PullRequest { url timelineItems(itemTypes: [CLOSED_EVENT], last: 1) { nodes { ... on ClosedEvent { actor { login } } } } } }
+  }
+}"""
+print("finding withdrawn pull requests…", file=sys.stderr)
+withdrawn, after = set(), None
+while True:
+    page = graphql(WITHDRAWN, q=f"author:{USER} is:pr is:closed is:unmerged", after=after)["search"]
+    for n in page["nodes"]:
+        closed = n["timelineItems"]["nodes"]
+        if closed and (closed[0]["actor"] or {}).get("login", "").lower() == USER.lower():
+            withdrawn.add(n["url"])
+    if not page["pageInfo"]["hasNextPage"]:
+        break
+    after = page["pageInfo"]["endCursor"]
+prs = [pr for pr in prs if pr["html_url"] not in withdrawn]
 print("counting issues…", file=sys.stderr)
 issues = request(f"https://api.github.com/search/issues?q={urllib.parse.quote(f'author:{USER} type:issue')}&per_page=1")["total_count"]
 
