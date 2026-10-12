@@ -232,6 +232,7 @@ main > section + section {
 
   p {
     margin-top: 0;
+    break-inside: avoid; // columns break between paragraphs, never inside one
   }
 
   p:last-child {
