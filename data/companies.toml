@@ -1,5 +1,6 @@
 # Companies wall: logos only, one neutral group, newest relationship first.
-# label: also print the name next to the mark (for abstract marks without a wordmark).
+# label: also print the name next to the mark (for abstract marks without a wordmark); a string
+# is printed instead of the name.
 # size: optical scale of the mark relative to the default height (compact icons > 1, heavy wordmarks < 1).
 # logo: file in static/logos/ (monochrome SVG with fill="currentColor", see design/clean-logo.py
 # and static/logos/SOURCES.md). Without a logo the name is shown as text.
@@ -40,7 +41,7 @@ size = 1.3
 name = "White Matter"
 url = "https://white-matter.com"
 logo = "white-matter.svg"
-size = 0.9
+size = 0.5 # a wide mark: sized for the same area as the square ones, not the same height
 label = true
 
 [[company]]
@@ -53,6 +54,7 @@ size = 1.5
 name = "Blackrock Neurotech"
 url = "https://blackrockneurotech.com"
 logo = "blackrock-neurotech.svg"
+size = 0.85
 
 [[company]]
 name = "Parity Technologies"
@@ -64,23 +66,23 @@ size = 0.9
 name = "Polkadot Blockchain Academy"
 url = "https://polkadot.academy"
 logo = "polkadot-academy.svg"
-size = 1.15
+size = 1.0
 
 [[company]]
 name = "LMU Munich"
 url = "https://www.lmu.de"
 logo = "lmu.svg"
 size = 1.5
-label = true
+label = "Munich" # the mark already spells LMU
 
 [[company]]
 name = "TReND in Africa"
 url = "https://trendinafrica.org"
 logo = "trend-in-africa.svg"
-size = 1.6
+size = 1.3
 
 [[company]]
 name = "CIN, University of Tübingen"
 url = "https://uni-tuebingen.de/forschung/forschungsschwerpunkte/cin/"
 logo = "cin.svg"
-size = 1.5
+size = 1.3

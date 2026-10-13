@@ -191,6 +191,7 @@
   > span {
     display: flex;
     align-items: center;
+    justify-content: center; // marks range from compact to full-width; centred, the row reads even
     height: 5.5rem;
     color: var(--fg);
     text-decoration: none;
@@ -235,6 +236,9 @@
   }
 
   .tile-label {
+    // a wrapped name keeps the full line width and pushes the lockup left; min-content lets the
+    // box shrink to its words so the lockup centres
+    width: min-content;
     font-weight: 700;
     font-size: var(--fs-1);
     letter-spacing: -0.01em;

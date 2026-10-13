@@ -4,7 +4,7 @@
   {%- if c.url %}<a href="{{ c.url }}" rel="noopener" aria-label="{{ c.name }}">{% else %}<span role="img" aria-label="{{ c.name }}">{% endif %}
   {%- if c.logo %}
   {{ load_data(path="static/logos/" ~ c.logo) | safe }}
-  {%- if c.label %}<span class="tile-label">{{ c.name }}</span>{% endif %}
+  {%- if c.label %}<span class="tile-label">{% if c.label is string %}{{ c.label }}{% else %}{{ c.name }}{% endif %}</span>{% endif %}
   {%- else %}
   <span class="tile-name">{{ c.name }}</span>
   {%- endif %}

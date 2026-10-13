@@ -22,7 +22,7 @@ if not vb:
     vbv = f"0 0 {w.group(1)} {h.group(1)}"
 else:
     vbv = vb.group(1)
-new_head = f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vbv}" fill="currentColor" preserveAspectRatio="xMinYMid meet" aria-hidden="true" focusable="false">'
+new_head = f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vbv}" fill="currentColor" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">'
 s = new_head + s[len(head):]
 s = re.sub(r"\s+", " ", s).replace("> <", "><").strip()
 open(dst, "w").write(s + "\n")
