@@ -15,4 +15,4 @@ tech = ["Ruby", "pseudocode.js", "KaTeX", "ExecJS"]
 featured = false
 +++
 
-Written alongside the AsciiDoc toolchain of the Polkadot specification, which needed algorithms typeset the way papers do. The gem wraps pseudocode.js and KaTeX through ExecJS, in the style of katex-ruby: `Pseudocode.render(algorithm)` returns HTML, and the pseudocode stylesheet makes it look right. Published as the `pseudocode` gem under the MIT licence.
+Written alongside the AsciiDoc toolchain of the Polkadot specification, which needed algorithms typeset the way papers do. The gem wraps pseudocode.js and KaTeX through ExecJS, in the style of katex-ruby: `Pseudocode.render(algorithm)` returns HTML, and the pseudocode stylesheet makes it look right. Published as the `pseudocode` gem under the MIT license.

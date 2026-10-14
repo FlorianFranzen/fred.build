@@ -16,7 +16,7 @@ tech = ["AsciiDoc", "Julia", "conformance testing"]
 featured = true
 +++
 
-A protocol is only decentralised once more than one implementation of it exists. As Polkadot Specification Lead at the Web3 Foundation, the studio's founder led the work of turning the reference implementation's behaviour into a specification that Gossamer (Go), Kagome (C++) and the Rust host could all be checked against.
+A protocol is only decentralized once more than one implementation of it exists. As Polkadot Specification Lead at the Web3 Foundation, the studio's founder led the work of turning the reference implementation's behavior into a specification that Gossamer (Go), Kagome (C++) and the Rust host could all be checked against.
 
 That meant three things in practice: a readable, versioned document covering the host, networking, consensus and runtime interfaces; a conformance test suite that exercised each client against the same fixtures; and the slow diplomatic work of getting multiple teams to agree on what the protocol actually was where the code disagreed with itself. The multi-client ecosystem the network runs on today grew out of that process.
 

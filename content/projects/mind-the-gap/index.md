@@ -22,5 +22,5 @@ The command-line tool derives a full OpenPGP key set from a 256-bit mnemonic: a 
 Around the tool sits a NixOS live ISO (`nix build github:gliology/mind-the-gap#iso`) that boots without networking, carries the card tooling, and is reproducible bit for bit. A NixOS VM test exercises the derivation path on every change. Open work includes Solo 2 and Nitrokey 3 support and a PIV certificate flow.
 
 <!-- Draft paragraph, publish once the fork is documented:
-The OpenPGP side builds on a patched fork of the Sequoia library (gli.al/sequoia on GitLab) that prioritises certificate size, so a full key set fits on the cards it targets.
+The OpenPGP side builds on a patched fork of the Sequoia library (gli.al/sequoia on GitLab) that prioritizes certificate size, so a full key set fits on the cards it targets.
 -->

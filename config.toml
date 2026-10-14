@@ -38,7 +38,7 @@ city = "Zug"
 country = "CH"
 founder = "Florian Franzen"
 founder_url = "https://florian.franzen.io"
-# Browser chrome colours; the same values live in sass/_tokens.scss and site.webmanifest.
+# Browser chrome colors; the same values live in sass/_tokens.scss and site.webmanifest.
 theme_light = "#ffffff"
 theme_dark = "#0f0f0f"
 # Accent palette, read by the design/ scripts (logo, favicon, covers, card); sass/_tokens.scss

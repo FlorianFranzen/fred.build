@@ -4,7 +4,7 @@
 
 [[service]]
 title = "Technical leadership and architecture"
-blurb = "Technical direction from roadmap to production: architecture decisions, hiring and team building, partnerships and integrations; research, due-diligence and code reviews for investors and product teams."
+blurb = "Technical direction from roadmap to production: architecture decisions, hiring and team building, partnerships and integrations; research, due diligence and code reviews for investors and product teams."
 
 [[service]]
 title = "Protocol research and specification"
@@ -24,15 +24,15 @@ blurb = "Schematic and PCB in KiCad, then the firmware and host software that ma
 
 [[service]]
 title = "Scientific computing and computer vision"
-blurb = "Acquisition, analysis pipelines and machine learning on the data a lab or product actually produces: electrophysiology, spike sorting, 3-D reconstruction from video, GPU-accelerated where it pays."
+blurb = "Acquisition, analysis pipelines and machine learning on the data a lab or product actually produces: electrophysiology, spike sorting, 3D reconstruction from video, GPU-accelerated where it pays."
 
 [[service]]
 title = "Teaching and workshops"
-blurb = "Hands-on courses and workshops for engineers, researchers and students, from first principles to real systems: cryptography, economics and blockchain, CAD, 3-D printing and microcontrollers. Lab material included."
+blurb = "Hands-on courses and workshops for engineers, researchers and students, from first principles to real systems: cryptography, economics and blockchain, CAD, 3D printing and microcontrollers. Lab material included."
 
 [[service]]
 title = "Data digitization"
-blurb = "Analogue tape recovered into clean digital archives: the RF signal captured with CXADC and decoded with VHS-Decode instead of a capture card, dropouts repaired in software, every file checksummed and documented."
+blurb = "Analog tape recovered into clean digital archives: the RF signal captured with CXADC and decoded with VHS-Decode instead of a capture card, dropouts repaired in software, every file checksummed and documented."
 
 [[service]]
 title = "Electronics repair and modification"
@@ -70,4 +70,4 @@ items = ["Git", "SVN", "CMake", "Ghidra", "IDA Pro", "Fuzzing", "AsciiDoc", "Dox
 
 [[tags]]
 group = "Science"
-items = ["ROCm", "Ollama", "LSD-SLAM", "Bayesian modelling", "Spike sorting", "Electrophysiology"]
+items = ["ROCm", "Ollama", "LSD-SLAM", "Bayesian modeling", "Spike sorting", "Electrophysiology"]
