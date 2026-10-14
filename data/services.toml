@@ -11,8 +11,8 @@ title = "Protocol research and specification"
 blurb = "Specifications that independent teams can implement, with conformance tests to prove it; consensus and cryptography reviews; tokenomics and game-theory checks before a design ships to mainnet."
 
 [[service]]
-title = "Infrastructure and validator operations"
-blurb = "NixOS-declared bare metal and cloud, Kubernetes, CI/CD and the networks underneath; validators and RPC nodes for Substrate and Solana with offline keys. Monitored, documented, handed over runnable."
+title = "Infrastructure and key management"
+blurb = "NixOS-declared bare metal and cloud, Kubernetes, CI/CD and web3 nodes; hardware-backed keys, from the key ceremony to signing policies and governance. Monitored, documented, handed over runnable and secure."
 
 [[service]]
 title = "Security and reverse engineering"
