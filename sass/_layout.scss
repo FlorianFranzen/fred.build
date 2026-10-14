@@ -22,6 +22,17 @@
     flex-wrap: wrap;
     padding-block: 1rem;
   }
+
+  // phones: the menu takes a row of its own under the logo (Contact moves up beside the logo)
+  @media (max-width: 40rem) {
+    .wrap {
+      position: relative;
+    }
+
+    nav {
+      flex-basis: 100%;
+    }
+  }
 }
 
 .brand {
@@ -80,21 +91,35 @@
       color: var(--accent-text);
     }
   }
-  // one line on phones: tighter tracking and slashes, smaller caps below 25rem
+  // phones: the last item (Contact) sits in the logo row, underlined in the accent; the rest
+  // stay on one line under the logo with tighter tracking and squares, smaller caps below 25rem
   @media (max-width: 40rem) {
+    flex-wrap: nowrap;
     letter-spacing: 0.05em;
 
     li + li::before {
       margin-inline: 0.55rem;
     }
+
+    li:last-child {
+      position: absolute;
+      top: 1rem;
+      right: var(--gutter);
+      height: 1.125rem;
+
+      &::before {
+        display: none;
+      }
+
+      a {
+        text-decoration: underline 2px var(--accent);
+        text-underline-offset: 0.35em;
+      }
+    }
   }
 
   @media (max-width: 25rem) {
     font-size: 0.6875rem;
-
-    li + li::before {
-      margin-inline: 0.4rem;
-    }
   }
 }
 
